@@ -4,3 +4,9 @@
   border-bottom: 1px solid rgb(84, 84, 84, .7);
   width: 100%;
 }
+
+@media screen and (max-width: 425px){
+  .header {
+    min-height: 56px;
+  }
+}
