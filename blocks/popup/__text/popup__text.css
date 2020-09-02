@@ -1,0 +1,40 @@
+.popup__text {
+  border: none;
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .5);
+  margin-bottom: 30px;
+  min-height: 27px;
+  width: 100%;
+}
+
+.popup__text::-webkit-input-placeholder {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__text::-moz-placeholder {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__text::-ms-input-placeholder {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__text::placeholder {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
