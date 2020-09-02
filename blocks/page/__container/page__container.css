@@ -1,7 +1,9 @@
 .page__container {
-  display: flex;
+  display: grid;
+  justify-items: center;
+    /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
   width: 100%;
   max-width: 1280px;
   min-width: 320px;
