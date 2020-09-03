@@ -9,8 +9,8 @@
 </head>
 
 <body class="page">
-  <div class="page__container section">
-    <header class="header section page__header">
+  <div class="page__container">
+    <header class="header page__header">
       <img class="header__logo" src="./images/logo.svg" alt="Логотип">
     </header>
     <main class="content page__main">
@@ -19,54 +19,54 @@
         <div class="profile__info">
           <div class="profile__box">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button section" type="button" aria-label="Кнопка редактирования"></button>
+            <button class="profile__edit-button" type="button" aria-label="Кнопка редактирования"></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="profile__add-button section" type="button" aria-label="Кнопка - добавить"></button>
+        <button class="profile__add-button" type="button" aria-label="Кнопка - добавить"></button>
       </section>
       <section class="cards">
         <ul class="cards__list">
-          <li class="cards__item">
-            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкесск" class="cards__img ">
-            <div class="cards__sign">
-              <h2 class="cards__title">Карачаево-Черкесск</h2>
-              <button class="cards__button" type="button" aria-label="Кнопка - нравится"></button>
+          <li class="card">
+            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкесск" class="card__img">
+            <div class="card__sign">
+              <h2 class="card__title">Карачаево-Черкесск</h2>
+              <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
             </div>
           </li>
-          <li class="cards__item">
-            <img src="./images/Dombai.jpg" alt="Домбай" class="cards__img">
-            <div class="cards__sign">
-              <h2 class="cards__title">Домбай</h2>
-              <button class="cards__button" type="button" aria-label="Кнопка - нравится"></button>
+          <li class="card">
+            <img src="./images/Dombai.jpg" alt="Домбай" class="card__img">
+            <div class="card__sign">
+              <h2 class="card__title">Домбай</h2>
+              <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
             </div>
           </li>
-          <li class="cards__item">
-            <img src="./images/mount-elbrus.jpg" alt="Гора Эльбрус" class="cards__img">
-            <div class="cards__sign">
-              <h2 class="cards__title">Гора Эльбрус</h2>
-              <button class="cards__button" type="button" aria-label="Кнопка - нравится"></button>
+          <li class="card">
+            <img src="./images/mount-elbrus.jpg" alt="Гора Эльбрус" class="card__img">
+            <div class="card__sign">
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
             </div>
           </li>
-          <li class="cards__item">
-            <img src="./images/arkhyz.jpg" alt="Архыз" class="cards__img">
-            <div class="cards__sign">
-              <h2 class="cards__title">Архыз</h2>
-              <button class="cards__button" type="button" aria-label="Кнопка - нравится"></button>
+          <li class="card">
+            <img src="./images/arkhyz.jpg" alt="Архыз" class="card__img">
+            <div class="card__sign">
+              <h2 class="card__title">Архыз</h2>
+              <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
             </div>
           </li>
-          <li class="cards__item">
-            <img src="./images/kamchatka.jpg" alt="Камчатка" class="cards__img">
-            <div class="cards__sign">
-              <h2 class="cards__title">Камчатка</h2>
-              <button class="cards__button" type="button" aria-label="Кнопка - нравится"></button>
+          <li class="card">
+            <img src="./images/kamchatka.jpg" alt="Камчатка" class="card__img">
+            <div class="card__sign">
+              <h2 class="card__title">Камчатка</h2>
+              <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
             </div>
           </li>
-          <li class="cards__item">
-            <img src="./images/sevastopol.jpg" alt="Севастополь" class="cards__img">
-            <div class="cards__sign">
-              <h2 class="cards__title">Севастополь</h2>
-              <button class="cards__button" type="button" aria-label="Кнопка - нравится"></button>
+          <li class="card">
+            <img src="./images/sevastopol.jpg" alt="Севастополь" class="card__img">
+            <div class="card__sign">
+              <h2 class="card__title">Севастополь</h2>
+              <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
             </div>
           </li>
         </ul>
@@ -75,15 +75,15 @@
     <footer class="footer page__footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup popup_opened">
-      <form class="popup__container section" action="#">
+    <div class="popup popup_opened">
+      <form class="popup__container" action="#" name="editForm">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__text" type="text" name="nickname" placeholder="Жак-Ив Кусто" autocomplete="off">
-        <input class="popup__text" type="text" name="description" placeholder="Исследователь океана" autocomplete="off">
+        <input class="popup__text" type="text" name="nickname" placeholder="Жак-Ив Кусто" autocomplete="off" required>
+        <input class="popup__text" type="text" name="description" placeholder="Исследователь океана" autocomplete="off" required>
         <button class="popup__submit" type="submit">Сохранить</button>
         <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
       </form>
-    </section>
+    </div>
   </div>
   <script src="./scripts/index.js" defer></script>
 </body>
