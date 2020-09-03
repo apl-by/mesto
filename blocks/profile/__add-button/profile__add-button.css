@@ -4,10 +4,10 @@
   width: 150px;
   height: 50px;
   border: 2px solid #FFFFFF;
-border-radius: 2px;
-margin-left: auto;
-padding: 0;
-cursor: pointer;
+  border-radius: 2px;
+  margin-left: auto;
+  padding: 0;
+  cursor: pointer;
 }
 
 .profile__add-button:focus {
@@ -21,8 +21,8 @@ cursor: pointer;
 
 @media screen and (max-width: 768px) {
   .profile__add-button {
-margin-left: 0;
-margin-top: 36px;
-width: 282px;
+    margin-left: 0;
+    margin-top: 36px;
+    width: 282px;
   }
 }
