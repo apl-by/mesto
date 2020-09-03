@@ -7,34 +7,3 @@
   width: 100%;
 }
 
-.popup__text::-webkit-input-placeholder {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
-}
-
-.popup__text::-moz-placeholder {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
-}
-
-.popup__text::-ms-input-placeholder {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
-}
-
-.popup__text::placeholder {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
-}
