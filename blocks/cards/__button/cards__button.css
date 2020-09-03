@@ -2,11 +2,15 @@
   background: none;
   box-shadow: none;
   border: none;
-  padding: 0;
-  margin-left: 27px;
+  width: 21px;
+  height: 19px;
+  background-image: url('../../../images/Heart-button.svg');
+  background-position: center;
+  background-position: cover;
+  margin-left: auto;
   cursor: pointer;
-  display: flex;
-}
+  padding: 0;
+  }
 
 .cards__button:focus {
   outline: none;
