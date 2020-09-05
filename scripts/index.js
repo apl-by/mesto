@@ -8,15 +8,15 @@ let jobInput = popup.querySelector('input[name="description"]');
 let profileName = profile.querySelector('.profile__name');
 let profileDescription = profile.querySelector('.profile__description');
 
-let popupToggle = () => {
-  popup.classList.toggle('popup_opened');
+let popupOpen = () => {
+  popup.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
 }
 
 let popupClose = (ev) => {
   if (ev.target === ev.currentTarget) {
-    popupToggle();
+    popup.classList.remove('popup_opened');
   }
 }
 
@@ -24,10 +24,10 @@ let formSubmitHandler = (ev) => {
   ev.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  popupToggle();
+  popup.classList.remove('popup_opened');
 }
 
-profileEditButton.addEventListener('click', popupToggle)
+profileEditButton.addEventListener('click', popupOpen)
 popupCloseButton.addEventListener('click', popupClose);
 popup.addEventListener('click', popupClose);
 formElement.addEventListener('submit', formSubmitHandler);
