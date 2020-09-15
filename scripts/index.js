@@ -3,15 +3,15 @@ let profile = document.querySelector('.profile');
 let profileEditButton = profile.querySelector('.profile__edit-button');
 let popupCloseButton = popup.querySelector('.popup__close');
 let formElement = popup.querySelector('.popup__container');
-let nameInput = popup.querySelector('input[name="nickname"]');
-let jobInput = popup.querySelector('input[name="description"]');
+let nameInput = popup.querySelector('input[name="name"]');
+let jobInput = popup.querySelector('input[name="job"]');
 let profileName = profile.querySelector('.profile__name');
-let profileDescription = profile.querySelector('.profile__description');
+let profileJob = profile.querySelector('.profile__job');
 
 let popupOpen = () => {
   popup.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
-  jobInput.value = profileDescription.textContent;
+  jobInput.value = profileJob.textContent;
 }
 
 let popupClose = (ev) => {
@@ -23,7 +23,7 @@ let popupClose = (ev) => {
 let formSubmitHandler = (ev) => {
   ev.preventDefault();
   profileName.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
+  profileJob.textContent = jobInput.value;
   popup.classList.remove('popup_opened');
 }
 
