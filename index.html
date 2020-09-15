@@ -27,7 +27,16 @@
       </section>
       <section class="cards">
         <ul class="cards__list">
-          <li class="card">
+          <template class="js-card">
+            <li class="card">
+              <img src="" alt="" class="card__img">
+              <div class="card__sign">
+                <h2 class="card__title"></h2>
+                <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
+              </div>
+            </li>
+          </template>
+     <!-- <li class="card">
             <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкесск" class="card__img">
             <div class="card__sign">
               <h2 class="card__title">Карачаево-Черкесск</h2>
@@ -68,8 +77,8 @@
               <h2 class="card__title">Севастополь</h2>
               <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
             </div>
-          </li>
-        </ul>
+          </li>-->
+        </ul>  
       </section>
     </main>
     <footer class="footer page__footer">
