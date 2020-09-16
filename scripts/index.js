@@ -1,12 +1,15 @@
-const popup = document.querySelector('.popup');
 const profile = document.querySelector('.profile');
-const profileEditButton = profile.querySelector('.profile__edit-button');
-const popupCloseButton = popup.querySelector('.popup__close');
-const formElement = popup.querySelector('.popup__container');
-const nameInput = popup.querySelector('input[name="name"]');
-const jobInput = popup.querySelector('input[name="job"]');
+const profileEdit = profile.querySelector('.profile__edit-button');
+const profileAdd = profile.querySelector('.profile__add-button');
 const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__job');
+const footer = document.querySelector('.footer')
+const popup = document.querySelector('.popup');
+const popupTitle = popup.querySelector('.popup__title');
+const formElement = popup.querySelector('.popup__container');
+const firstInput = popup.querySelector('input[name="first-field"]');
+const secondInput = popup.querySelector('input[name="second-field"]');
+const popupClose = popup.querySelector('.popup__close');
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.js-card').content;
 const initialCards = [
@@ -35,39 +38,87 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+const newList = initialCards.slice();
 
-const renderInitialCards = () => {
-  initialCards.forEach(elt => {
+
+const renderInitial = () => {
+  initialCards.forEach(el => {
     const copyCardTemplate = cardTemplate.cloneNode(true);
-    copyCardTemplate.querySelector('.card__title').textContent = elt.name;
-    copyCardTemplate.querySelector('.card__img').src = elt.link;
-    copyCardTemplate.querySelector('.card__img').alt = elt.name;
+    copyCardTemplate.querySelector('.card__title').textContent = el.name;
+    copyCardTemplate.querySelector('.card__img').src = el.link;
+    copyCardTemplate.querySelector('.card__img').alt = el.name;
     cardsList.append(copyCardTemplate);
+    console.log(initialCards)
   })
 }
 
-const popupOpen = () => {
-  popup.classList.add('popup_opened');
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+const submitAddForm = () => {
+    const newCard = {
+    name: firstInput.value,
+    link: secondInput.value
+  };
+  newList.unshift(newCard);
+   const copyCardTemplate = cardTemplate.cloneNode(true);
+   copyCardTemplate.querySelector('.card__title').textContent = newCard.name;
+   copyCardTemplate.querySelector('.card__img').src = newCard.link;
+   copyCardTemplate.querySelector('.card__img').alt = newCard.name;
+   cardsList.prepend(copyCardTemplate);
+   console.log(newList)
 }
 
-const popupClose = (ev) => {
+const submitEditForm = () => {
+  profileName.textContent = firstInput.value;
+  profileJob.textContent = secondInput.value;
+}
+
+const createEditForm = () => {
+  firstInput.value = profileName.textContent;
+  secondInput.value = profileJob.textContent;
+  formElement.action = '#';
+  formElement.name = 'edit-form';
+  popupTitle.textContent = 'Редактировать профиль';
+}
+
+const createAddForm = () => {
+  firstInput.value = '';
+  secondInput.value = '';
+  firstInput.placeholder = 'Название';
+  secondInput.placeholder = 'Ссылка на картинку';
+  formElement.action = '#';
+  formElement.name = 'add-form';
+  popupTitle.textContent = 'Новое место';
+}
+
+const openPopup = (ev) => {
+  popup.classList.add('popup_opened');
+
+  if (ev.srcElement.className === 'profile__edit-button') {
+    createEditForm()
+  } else if (ev.srcElement.className === 'profile__add-button') {
+    createAddForm();
+  }
+}
+
+const closePopup = (ev) => {
   if (ev.target === ev.currentTarget) {
     popup.classList.remove('popup_opened');
   }
 }
 
-const formSubmitHandler = (ev) => {
+const handleForm = (ev) => {
   ev.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
+  if (formElement.name === 'edit-form') {
+    submitEditForm()
+  } else if (formElement.name === 'add-form') {
+    submitAddForm()
+  }
   popup.classList.remove('popup_opened');
 }
 
-profileEditButton.addEventListener('click', popupOpen)
-popupCloseButton.addEventListener('click', popupClose);
-popup.addEventListener('click', popupClose);
-formElement.addEventListener('submit', formSubmitHandler);
+profileEdit.addEventListener('click', openPopup);
+profileAdd.addEventListener('click', openPopup);
+popupClose.addEventListener('click', closePopup);
+popup.addEventListener('click', closePopup);
+formElement.addEventListener('submit', handleForm);
 
-renderInitialCards();
+renderInitial();
