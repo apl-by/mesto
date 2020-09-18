@@ -3,13 +3,21 @@ const profileEdit = profile.querySelector('.profile__edit-button');
 const profileAdd = profile.querySelector('.profile__add-button');
 const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__job');
-const footer = document.querySelector('.footer')
-const popup = document.querySelector('.popup');
-const popupTitle = popup.querySelector('.popup__title');
-const formElement = popup.querySelector('.popup__container');
-const firstInput = popup.querySelector('input[name="first-field"]');
-const secondInput = popup.querySelector('input[name="second-field"]');
-const popupClose = popup.querySelector('.popup__close');
+
+const popupEditForm = document.querySelector('form[name="editForm"]').parentElement
+const formEdit = popupEditForm.querySelector('.popup__container');
+const inputsEdit = popupEditForm.querySelectorAll('input');
+const firstInputEdit = inputsEdit[0];
+const secondInputEdit = inputsEdit[1];
+const popupEditClose = popupEditForm.querySelector('.popup__close');
+
+const popupAddForm = document.querySelector('form[name="addForm"]').parentElement
+const formAdd = popupAddForm.querySelector('.popup__container');
+const inputsAdd = popupAddForm.querySelectorAll('input');
+const firstInputAdd = inputsAdd[0];
+const secondInputAdd = inputsAdd[1];
+const popupAddClose = popupAddForm.querySelector('.popup__close');
+
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.js-card').content;
 const initialCards = [
@@ -38,89 +46,90 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const newList = initialCards.slice();
+// const newList = initialCards.slice();
 
-const createCard = (el) => {
+
+const createCard = (elt) => {
   const copyCardTemplate = cardTemplate.cloneNode(true);
-    copyCardTemplate.querySelector('.card__title').textContent = el.name;
-    copyCardTemplate.querySelector('.card__img').src = el.link;
-    copyCardTemplate.querySelector('.card__img').alt = el.name;
-    copyCardTemplate.querySelector('.card__button').addEventListener('click', function(ev) {
-      ev.target.classList.toggle('card__button_active')
-    })
-    return copyCardTemplate
+  copyCardTemplate.querySelector('.card__title').textContent = elt.name;
+  copyCardTemplate.querySelector('.card__img').src = elt.link;
+  copyCardTemplate.querySelector('.card__img').alt = elt.name;
+  copyCardTemplate.querySelector('.card__button').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('card__button_active')
+  })
+  return copyCardTemplate
 }
 
 const renderInitial = () => {
-  initialCards.forEach(el => {
-    const card = createCard(el)
+  initialCards.forEach(elt => {
+    const card = createCard(elt)
     cardsList.append(card);
   })
 }
 
-const submitAddForm = () => {
-    const newCard = {
-    name: firstInput.value,
-    link: secondInput.value
+const submitAddForm = (evt) => {
+  evt.preventDefault();
+  const newCard = {
+    name: firstInputAdd.value,
+    link: secondInputAdd.value
   };
-  newList.unshift(newCard);
-   const card = createCard(newCard)
-   cardsList.prepend(card);
+  // newList.unshift(newCard);
+  const card = createCard(newCard)
+  cardsList.prepend(card);
+  closePopup(popupAddForm)
 }
 
-const submitEditForm = () => {
-  profileName.textContent = firstInput.value;
-  profileJob.textContent = secondInput.value;
+const submitEditForm = (evt) => {
+  evt.preventDefault();
+  profileName.textContent = firstInputEdit.value;
+  profileJob.textContent = secondInputEdit.value;
+
+  closePopup(popupEditForm)
 }
 
-const createEditForm = () => {
-  firstInput.value = profileName.textContent;
-  secondInput.value = profileJob.textContent;
-  formElement.action = '#';
-  formElement.name = 'edit-form';
-  popupTitle.textContent = 'Редактировать профиль';
-}
 
-const createAddForm = () => {
-  firstInput.value = '';
-  secondInput.value = '';
-  firstInput.placeholder = 'Название';
-  secondInput.placeholder = 'Ссылка на картинку';
-  formElement.action = '#';
-  formElement.name = 'add-form';
-  popupTitle.textContent = 'Новое место';
-}
 
-const openPopup = (ev) => {
-  popup.classList.add('popup_opened');
 
-  if (ev.srcElement.className === 'profile__edit-button') {
-    createEditForm()
-  } else if (ev.srcElement.className === 'profile__add-button') {
-    createAddForm();
+
+const openPopup = (evt) => {
+  evt.classList.add('popup_opened');
+  if (evt === popupEditForm) {
+    firstInputEdit.value = profileName.textContent;
+    secondInputEdit.value = profileJob.textContent;
   }
 }
 
-const closePopup = (ev) => {
-  if (ev.target === ev.currentTarget) {
-    popup.classList.remove('popup_opened');
-  }
+const closePopup = (evt) => {
+  evt.classList.remove('popup_opened');
 }
 
-const handleForm = (ev) => {
-  ev.preventDefault();
-  if (formElement.name === 'edit-form') {
-    submitEditForm()
-  } else if (formElement.name === 'add-form') {
-    submitAddForm()
-  }
-  popup.classList.remove('popup_opened');
-}
 
-profileEdit.addEventListener('click', openPopup);
-profileAdd.addEventListener('click', openPopup);
-popupClose.addEventListener('click', closePopup);
-popup.addEventListener('click', closePopup);
-formElement.addEventListener('submit', handleForm);
+profileEdit.addEventListener('click', function () {
+  openPopup(popupEditForm)
+});
+popupEditClose.addEventListener('click', function (evt) {
+  if (evt.target === evt.currentTarget)
+    closePopup(popupEditForm)
+});
+popupEditForm.addEventListener('click', function (evt) {
+  if (evt.target === evt.currentTarget)
+    closePopup(popupEditForm)
+});
+formEdit.addEventListener('submit', submitEditForm);
+
+
+
+profileAdd.addEventListener('click', function () {
+  openPopup(popupAddForm)
+});
+popupAddClose.addEventListener('click', function (evt) {
+  if (evt.target === evt.currentTarget)
+    closePopup(popupAddForm)
+});
+popupAddForm.addEventListener('click', function (evt) {
+  if (evt.target === evt.currentTarget)
+    closePopup(popupAddForm)
+});
+formAdd.addEventListener('submit', submitAddForm);
 
 renderInitial();
