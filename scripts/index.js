@@ -40,15 +40,21 @@ const initialCards = [
 ];
 const newList = initialCards.slice();
 
-
-const renderInitial = () => {
-  initialCards.forEach(el => {
-    const copyCardTemplate = cardTemplate.cloneNode(true);
+const createCard = (el) => {
+  const copyCardTemplate = cardTemplate.cloneNode(true);
     copyCardTemplate.querySelector('.card__title').textContent = el.name;
     copyCardTemplate.querySelector('.card__img').src = el.link;
     copyCardTemplate.querySelector('.card__img').alt = el.name;
-    cardsList.append(copyCardTemplate);
-    console.log(initialCards)
+    copyCardTemplate.querySelector('.card__button').addEventListener('click', function(ev) {
+      ev.target.classList.toggle('card__button_active')
+    })
+    return copyCardTemplate
+}
+
+const renderInitial = () => {
+  initialCards.forEach(el => {
+    const card = createCard(el)
+    cardsList.append(card);
   })
 }
 
@@ -58,12 +64,8 @@ const submitAddForm = () => {
     link: secondInput.value
   };
   newList.unshift(newCard);
-   const copyCardTemplate = cardTemplate.cloneNode(true);
-   copyCardTemplate.querySelector('.card__title').textContent = newCard.name;
-   copyCardTemplate.querySelector('.card__img').src = newCard.link;
-   copyCardTemplate.querySelector('.card__img').alt = newCard.name;
-   cardsList.prepend(copyCardTemplate);
-   console.log(newList)
+   const card = createCard(newCard)
+   cardsList.prepend(card);
 }
 
 const submitEditForm = () => {
