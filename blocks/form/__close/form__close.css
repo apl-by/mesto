@@ -1,4 +1,4 @@
-.popup__close {
+.form__close {
   background: none;
   border: none;
   box-shadow: none;
@@ -13,13 +13,13 @@
   padding: 0;
 }
 
-.popup__close:focus {
+.form__close:focus {
   outline: none;
   opacity: .6;
 }
 
 
-.popup__close:hover {
+.form__close:hover {
   opacity: .6;
   transition: opacity .3s linear;
 }

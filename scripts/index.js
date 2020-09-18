@@ -5,18 +5,18 @@ const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__job');
 
 const popupEditForm = document.querySelector('form[name="editForm"]').parentElement
-const formEdit = popupEditForm.querySelector('.popup__container');
+const editForm = popupEditForm.querySelector('.form');
 const inputsEdit = popupEditForm.querySelectorAll('input');
 const firstInputEdit = inputsEdit[0];
 const secondInputEdit = inputsEdit[1];
-const popupEditClose = popupEditForm.querySelector('.popup__close');
+const editFormClose = popupEditForm.querySelector('.form__close');
 
 const popupAddForm = document.querySelector('form[name="addForm"]').parentElement
-const formAdd = popupAddForm.querySelector('.popup__container');
+const addForm = popupAddForm.querySelector('.form');
 const inputsAdd = popupAddForm.querySelectorAll('input');
 const firstInputAdd = inputsAdd[0];
 const secondInputAdd = inputsAdd[1];
-const popupAddClose = popupAddForm.querySelector('.popup__close');
+const addFormClose = popupAddForm.querySelector('.form__close');
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.js-card').content;
@@ -107,7 +107,7 @@ const closePopup = (evt) => {
 profileEdit.addEventListener('click', function () {
   openPopup(popupEditForm)
 });
-popupEditClose.addEventListener('click', function (evt) {
+editFormClose.addEventListener('click', function (evt) {
   if (evt.target === evt.currentTarget)
     closePopup(popupEditForm)
 });
@@ -115,14 +115,14 @@ popupEditForm.addEventListener('click', function (evt) {
   if (evt.target === evt.currentTarget)
     closePopup(popupEditForm)
 });
-formEdit.addEventListener('submit', submitEditForm);
+editForm.addEventListener('submit', submitEditForm);
 
 
 
 profileAdd.addEventListener('click', function () {
   openPopup(popupAddForm)
 });
-popupAddClose.addEventListener('click', function (evt) {
+addFormClose.addEventListener('click', function (evt) {
   if (evt.target === evt.currentTarget)
     closePopup(popupAddForm)
 });
@@ -130,6 +130,6 @@ popupAddForm.addEventListener('click', function (evt) {
   if (evt.target === evt.currentTarget)
     closePopup(popupAddForm)
 });
-formAdd.addEventListener('submit', submitAddForm);
+addForm.addEventListener('submit', submitAddForm);
 
 renderInitial();
