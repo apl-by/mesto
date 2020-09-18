@@ -46,8 +46,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-// const newList = initialCards.slice();
-
 
 const createCard = (elt) => {
   const copyCardTemplate = cardTemplate.cloneNode(true);
@@ -56,7 +54,10 @@ const createCard = (elt) => {
   copyCardTemplate.querySelector('.card__img').alt = elt.name;
   copyCardTemplate.querySelector('.card__button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__button_active')
-  })
+  });
+  copyCardTemplate.querySelector('.card__recycle').addEventListener('click', function (evt) {
+    evt.target.parentElement.remove()
+  });
   return copyCardTemplate
 }
 
@@ -73,10 +74,11 @@ const submitAddForm = (evt) => {
     name: firstInputAdd.value,
     link: secondInputAdd.value
   };
-  // newList.unshift(newCard);
   const card = createCard(newCard)
   cardsList.prepend(card);
-  closePopup(popupAddForm)
+  closePopup(popupAddForm);
+  firstInputAdd.value = '';
+  secondInputAdd.value = '';
 }
 
 const submitEditForm = (evt) => {
@@ -86,8 +88,6 @@ const submitEditForm = (evt) => {
 
   closePopup(popupEditForm)
 }
-
-
 
 
 
