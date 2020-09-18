@@ -44,6 +44,14 @@
 @import url('../blocks/form/__submit/form__submit.css');
 @import url('../blocks/form/__close/form__close.css');
 
+@import url('../blocks/item/item.css');
+@import url('../blocks/item/__img/item__img.css');
+@import url('../blocks/item/__text/item__text.css');
+@import url('../blocks/item/__close/item__close.css');
+
+
+
+
 
 
 

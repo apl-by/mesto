@@ -4,19 +4,24 @@ const profileAdd = profile.querySelector('.profile__add-button');
 const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__job');
 
-const popupEditForm = document.querySelector('form[name="editForm"]').parentElement
+const popupEditForm = document.querySelector('form[name="editForm"]').parentElement;
 const editForm = popupEditForm.querySelector('.form');
 const inputsEdit = popupEditForm.querySelectorAll('input');
 const firstInputEdit = inputsEdit[0];
 const secondInputEdit = inputsEdit[1];
 const editFormClose = popupEditForm.querySelector('.form__close');
 
-const popupAddForm = document.querySelector('form[name="addForm"]').parentElement
+const popupAddForm = document.querySelector('form[name="addForm"]').parentElement;
 const addForm = popupAddForm.querySelector('.form');
 const inputsAdd = popupAddForm.querySelectorAll('input');
 const firstInputAdd = inputsAdd[0];
 const secondInputAdd = inputsAdd[1];
 const addFormClose = popupAddForm.querySelector('.form__close');
+
+const popupItem = document.querySelector('.item').parentElement;
+const itemImage = popupItem.querySelector('.item__img');
+const itemText = popupItem.querySelector('.item__text');
+const itemClose = popupItem.querySelector('.item__close');
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.js-card').content;
@@ -58,6 +63,12 @@ const createCard = (elt) => {
   copyCardTemplate.querySelector('.card__recycle').addEventListener('click', function (evt) {
     evt.target.parentElement.remove()
   });
+  copyCardTemplate.querySelector('.card__img').addEventListener('click', function () {
+    openPopup(popupItem)
+    itemImage.src = elt.link;
+    itemImage.alt = elt.name;
+    itemText.textContent = elt.name
+  });
   return copyCardTemplate
 }
 
@@ -93,10 +104,6 @@ const submitEditForm = (evt) => {
 
 const openPopup = (evt) => {
   evt.classList.add('popup_opened');
-  if (evt === popupEditForm) {
-    firstInputEdit.value = profileName.textContent;
-    secondInputEdit.value = profileJob.textContent;
-  }
 }
 
 const closePopup = (evt) => {
@@ -106,6 +113,8 @@ const closePopup = (evt) => {
 
 profileEdit.addEventListener('click', function () {
   openPopup(popupEditForm)
+  firstInputEdit.value = profileName.textContent;
+  secondInputEdit.value = profileJob.textContent;
 });
 editFormClose.addEventListener('click', function (evt) {
   if (evt.target === evt.currentTarget)
@@ -131,5 +140,15 @@ popupAddForm.addEventListener('click', function (evt) {
     closePopup(popupAddForm)
 });
 addForm.addEventListener('submit', submitAddForm);
+
+
+itemClose.addEventListener('click', function (evt) {
+  if (evt.target === evt.currentTarget)
+    closePopup(popupItem)
+});
+popupItem.addEventListener('click', function (evt) {
+  if (evt.target === evt.currentTarget)
+    closePopup(popupItem)
+});
 
 renderInitial();
