@@ -96,11 +96,8 @@ const submitEditForm = (evt) => {
   evt.preventDefault();
   profileName.textContent = firstInputEdit.value;
   profileJob.textContent = secondInputEdit.value;
-
   closePopup(popupEditForm)
 }
-
-
 
 const openPopup = (evt) => {
   evt.classList.add('popup_opened');
@@ -109,7 +106,6 @@ const openPopup = (evt) => {
 const closePopup = (evt) => {
   evt.classList.remove('popup_opened');
 }
-
 
 profileEdit.addEventListener('click', function () {
   openPopup(popupEditForm)
@@ -126,8 +122,6 @@ popupEditForm.addEventListener('click', function (evt) {
 });
 editForm.addEventListener('submit', submitEditForm);
 
-
-
 profileAdd.addEventListener('click', function () {
   openPopup(popupAddForm)
 });
@@ -140,7 +134,6 @@ popupAddForm.addEventListener('click', function (evt) {
     closePopup(popupAddForm)
 });
 addForm.addEventListener('submit', submitAddForm);
-
 
 itemClose.addEventListener('click', function (evt) {
   if (evt.target === evt.currentTarget)
