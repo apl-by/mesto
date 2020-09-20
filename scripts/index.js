@@ -6,21 +6,19 @@ const profileAdd = profile.querySelector('.profile__add-button');
 const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__job');
 
-const popupEditForm = document.querySelector('form[name="editForm"]').parentElement;
+const popupEditForm = document.querySelector('.js-popup_editForm');
 const editForm = popupEditForm.querySelector('.form');
-const inputsEdit = popupEditForm.querySelectorAll('input');
-const firstInputEdit = inputsEdit[0];
-const secondInputEdit = inputsEdit[1];
+const firstInputEdit = popupEditForm.querySelector('input[name="name"]');
+const secondInputEdit = popupEditForm.querySelector('input[name="job"]');
 const editFormClose = popupEditForm.querySelector('.form__close');
 
-const popupAddForm = document.querySelector('form[name="addForm"]').parentElement;
+const popupAddForm = document.querySelector('.js-popup_addForm');
 const addForm = popupAddForm.querySelector('.form');
-const inputsAdd = popupAddForm.querySelectorAll('input');
-const firstInputAdd = inputsAdd[0];
-const secondInputAdd = inputsAdd[1];
+const firstInputAdd = popupAddForm.querySelector('input[name="place"]');
+const secondInputAdd = popupAddForm.querySelector('input[name="link"]');
 const addFormClose = popupAddForm.querySelector('.form__close');
 
-const popupItem = document.querySelector('.item').parentElement;
+const popupItem = document.querySelector('.js-popup_image');
 const itemImage = popupItem.querySelector('.item__img');
 const itemText = popupItem.querySelector('.item__text');
 const itemClose = popupItem.querySelector('.item__close');
