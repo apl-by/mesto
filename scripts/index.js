@@ -39,12 +39,25 @@ const createCard = (elt) => {
   return copyCardTemplate
 }
 
-const renderInitial = () => {
-  initialCards.forEach(elt => {
-    const card = createCard(elt)
-    cardsList.append(card);
-  })
+const putLike = (evt) => {
+  evt.target.classList.toggle('card__button_active')
 }
+
+const removeCard = (evt) => {
+  evt.target.closest('.card').remove()
+}
+
+const zoomImage = (elt) => {
+  openPopup(popupItem)
+  itemImage.src = elt.link;
+  itemImage.alt = elt.name;
+  itemText.textContent = elt.name
+}
+
+initialCards.forEach(elt => {
+  const card = createCard(elt);
+  cardsList.append(card);
+});
 
 const submitAddForm = (evt) => {
   evt.preventDefault();
@@ -52,11 +65,9 @@ const submitAddForm = (evt) => {
     name: firstInputAdd.value,
     link: secondInputAdd.value
   };
-  const card = createCard(newCard)
+  const card = createCard(newCard);
   cardsList.prepend(card);
   closePopup(popupAddForm);
-  firstInputAdd.value = '';
-  secondInputAdd.value = '';
 }
 
 const submitEditForm = (evt) => {
@@ -72,21 +83,6 @@ const openPopup = (evt) => {
 
 const closePopup = (evt) => {
   evt.classList.remove('popup_opened');
-}
-
-const putLike = (evt) => {
-  evt.target.classList.toggle('card__button_active')
-}
-
-const removeCard = (evt) => {
-  evt.target.closest('.card').remove()
-}
-
-const zoomImage = (elt) => {
-  openPopup(popupItem)
-  itemImage.src = elt.link;
-  itemImage.alt = elt.name;
-  itemText.textContent = elt.name
 }
 
 profileEdit.addEventListener('click', function () {
@@ -106,6 +102,8 @@ editForm.addEventListener('submit', submitEditForm);
 
 profileAdd.addEventListener('click', function () {
   openPopup(popupAddForm)
+  firstInputAdd.value = '';
+  secondInputAdd.value = '';
 });
 addFormClose.addEventListener('click', function (evt) {
   if (evt.target === evt.currentTarget)
@@ -125,5 +123,3 @@ popupItem.addEventListener('click', function (evt) {
   if (evt.target === evt.currentTarget)
     closePopup(popupItem)
 });
-
-renderInitial();
