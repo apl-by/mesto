@@ -77,12 +77,12 @@ const submitEditForm = (evt) => {
   closePopup(popupEditForm)
 }
 
-const openPopup = (evt) => {
-  evt.classList.add('popup_opened');
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
 }
 
-const closePopup = (evt) => {
-  evt.classList.remove('popup_opened');
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
 }
 
 profileEdit.addEventListener('click', function () {
