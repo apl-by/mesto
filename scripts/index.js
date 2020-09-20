@@ -1,3 +1,5 @@
+import {initialCards} from './data.js';
+
 const profile = document.querySelector('.profile');
 const profileEdit = profile.querySelector('.profile__edit-button');
 const profileAdd = profile.querySelector('.profile__add-button');
@@ -25,32 +27,7 @@ const itemClose = popupItem.querySelector('.item__close');
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.js-card').content;
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+
 
 const createCard = (elt) => {
   const copyCardTemplate = cardTemplate.cloneNode(true);
