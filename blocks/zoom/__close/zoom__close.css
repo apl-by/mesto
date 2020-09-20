@@ -1,4 +1,4 @@
-.item__close {
+.zoom__close {
   background: none;
   border: none;
   box-shadow: none;
@@ -13,12 +13,12 @@
   padding: 0;
 }
 
-.item__close:focus {
+.zoom__close:focus {
   outline: none;
   opacity: .6;
 }
 
-.item__close:hover {
+.zoom__close:hover {
   opacity: .6;
   transition: opacity .3s linear;
 }

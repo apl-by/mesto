@@ -1,4 +1,4 @@
-import {initialCards} from './data.js';
+import { initialCards } from './data.js';
 
 const profile = document.querySelector('.profile');
 const profileEdit = profile.querySelector('.profile__edit-button');
@@ -6,22 +6,22 @@ const profileAdd = profile.querySelector('.profile__add-button');
 const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__job');
 
-const popupEditForm = document.querySelector('.js-popup_editForm');
+const popupEditForm = document.querySelector('.js-popup_form_edit');
 const editForm = popupEditForm.querySelector('.form');
 const firstInputEdit = popupEditForm.querySelector('input[name="name"]');
 const secondInputEdit = popupEditForm.querySelector('input[name="job"]');
 const editFormClose = popupEditForm.querySelector('.form__close');
 
-const popupAddForm = document.querySelector('.js-popup_addForm');
+const popupAddForm = document.querySelector('.js-popup_form_add');
 const addForm = popupAddForm.querySelector('.form');
 const firstInputAdd = popupAddForm.querySelector('input[name="place"]');
 const secondInputAdd = popupAddForm.querySelector('input[name="link"]');
 const addFormClose = popupAddForm.querySelector('.form__close');
 
-const popupItem = document.querySelector('.js-popup_image');
-const itemImage = popupItem.querySelector('.item__img');
-const itemText = popupItem.querySelector('.item__text');
-const itemClose = popupItem.querySelector('.item__close');
+const popupZoom = document.querySelector('.js-popup_zoomed');
+const zoomImage = popupZoom.querySelector('.zoom__img');
+const zoomText = popupZoom.querySelector('.zoom__text');
+const zoomClose = popupZoom.querySelector('.zoom__close');
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.js-card').content;
@@ -35,7 +35,7 @@ const createCard = (elt) => {
   copyCardImage.alt = elt.name;
   copyCardTemplate.querySelector('.card__button').addEventListener('click', putLike);
   copyCardTemplate.querySelector('.card__recycle').addEventListener('click', removeCard);
-  copyCardImage.addEventListener('click', () => zoomImage(elt));
+  copyCardImage.addEventListener('click', () => zoomCard(elt));
   return copyCardTemplate
 }
 
@@ -47,11 +47,11 @@ const removeCard = (evt) => {
   evt.target.closest('.card').remove()
 }
 
-const zoomImage = (elt) => {
-  openPopup(popupItem)
-  itemImage.src = elt.link;
-  itemImage.alt = elt.name;
-  itemText.textContent = elt.name
+const zoomCard = (elt) => {
+  openPopup(popupZoom)
+  zoomImage.src = elt.link;
+  zoomImage.alt = elt.name;
+  zoomText.textContent = elt.name
 }
 
 initialCards.forEach(elt => {
@@ -83,7 +83,7 @@ const openPopup = (popup) => {
 
 const closePopup = (evt, popup) => {
   if (evt.target === evt.currentTarget)
-  popup.classList.remove('popup_opened');
+    popup.classList.remove('popup_opened');
 }
 
 profileEdit.addEventListener('click', function () {
@@ -104,5 +104,5 @@ addFormClose.addEventListener('click', (evt) => closePopup(evt, popupAddForm));
 popupAddForm.addEventListener('click', (evt) => closePopup(evt, popupAddForm));
 addForm.addEventListener('submit', submitAddForm);
 
-itemClose.addEventListener('click', (evt) => closePopup(evt, popupItem));
-popupItem.addEventListener('click', (evt) => closePopup(evt, popupItem));
+zoomClose.addEventListener('click', (evt) => closePopup(evt, popupZoom));
+popupZoom.addEventListener('click', (evt) => closePopup(evt, popupZoom));
