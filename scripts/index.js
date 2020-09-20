@@ -33,18 +33,9 @@ const createCard = (elt) => {
   copyCardTemplate.querySelector('.card__title').textContent = elt.name;
   copyCardImage.src = elt.link;
   copyCardImage.alt = elt.name;
-  copyCardTemplate.querySelector('.card__button').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__button_active')
-  });
-  copyCardTemplate.querySelector('.card__recycle').addEventListener('click', function (evt) {
-    evt.target.parentElement.remove()
-  });
-  copyCardTemplate.querySelector('.card__img').addEventListener('click', function () {
-    openPopup(popupItem)
-    itemImage.src = elt.link;
-    itemImage.alt = elt.name;
-    itemText.textContent = elt.name
-  });
+  copyCardTemplate.querySelector('.card__button').addEventListener('click', putLike);
+  copyCardTemplate.querySelector('.card__recycle').addEventListener('click', removeCard);
+  copyCardImage.addEventListener('click', () => zoomImage(elt));
   return copyCardTemplate
 }
 
@@ -81,6 +72,21 @@ const openPopup = (evt) => {
 
 const closePopup = (evt) => {
   evt.classList.remove('popup_opened');
+}
+
+const putLike = (evt) => {
+  evt.target.classList.toggle('card__button_active')
+}
+
+const removeCard = (evt) => {
+  evt.target.closest('.card').remove()
+}
+
+const zoomImage = (elt) => {
+  openPopup(popupItem)
+  itemImage.src = elt.link;
+  itemImage.alt = elt.name;
+  itemText.textContent = elt.name
 }
 
 profileEdit.addEventListener('click', function () {
