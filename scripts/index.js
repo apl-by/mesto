@@ -29,9 +29,10 @@ const cardTemplate = document.querySelector('.js-card').content;
 
 const createCard = (elt) => {
   const copyCardTemplate = cardTemplate.cloneNode(true);
+  const copyCardImage = copyCardTemplate.querySelector('.card__img');
   copyCardTemplate.querySelector('.card__title').textContent = elt.name;
-  copyCardTemplate.querySelector('.card__img').src = elt.link;
-  copyCardTemplate.querySelector('.card__img').alt = elt.name;
+  copyCardImage.src = elt.link;
+  copyCardImage.alt = elt.name;
   copyCardTemplate.querySelector('.card__button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__button_active')
   });
