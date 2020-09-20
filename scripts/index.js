@@ -67,21 +67,22 @@ const submitAddForm = (evt) => {
   };
   const card = createCard(newCard);
   cardsList.prepend(card);
-  closePopup(popupAddForm);
+  closePopup(evt, popupAddForm);
 }
 
 const submitEditForm = (evt) => {
   evt.preventDefault();
   profileName.textContent = firstInputEdit.value;
   profileJob.textContent = secondInputEdit.value;
-  closePopup(popupEditForm)
+  closePopup(evt, popupEditForm)
 }
 
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
 }
 
-const closePopup = (popup) => {
+const closePopup = (evt, popup) => {
+  if (evt.target === evt.currentTarget)
   popup.classList.remove('popup_opened');
 }
 
@@ -90,14 +91,8 @@ profileEdit.addEventListener('click', function () {
   firstInputEdit.value = profileName.textContent;
   secondInputEdit.value = profileJob.textContent;
 });
-editFormClose.addEventListener('click', function (evt) {
-  if (evt.target === evt.currentTarget)
-    closePopup(popupEditForm)
-});
-popupEditForm.addEventListener('click', function (evt) {
-  if (evt.target === evt.currentTarget)
-    closePopup(popupEditForm)
-});
+editFormClose.addEventListener('click', (evt) => closePopup(evt, popupEditForm));
+popupEditForm.addEventListener('click', (evt) => closePopup(evt, popupEditForm));
 editForm.addEventListener('submit', submitEditForm);
 
 profileAdd.addEventListener('click', function () {
@@ -105,21 +100,9 @@ profileAdd.addEventListener('click', function () {
   firstInputAdd.value = '';
   secondInputAdd.value = '';
 });
-addFormClose.addEventListener('click', function (evt) {
-  if (evt.target === evt.currentTarget)
-    closePopup(popupAddForm)
-});
-popupAddForm.addEventListener('click', function (evt) {
-  if (evt.target === evt.currentTarget)
-    closePopup(popupAddForm)
-});
+addFormClose.addEventListener('click', (evt) => closePopup(evt, popupAddForm));
+popupAddForm.addEventListener('click', (evt) => closePopup(evt, popupAddForm));
 addForm.addEventListener('submit', submitAddForm);
 
-itemClose.addEventListener('click', function (evt) {
-  if (evt.target === evt.currentTarget)
-    closePopup(popupItem)
-});
-popupItem.addEventListener('click', function (evt) {
-  if (evt.target === evt.currentTarget)
-    closePopup(popupItem)
-});
+itemClose.addEventListener('click', (evt) => closePopup(evt, popupItem));
+popupItem.addEventListener('click', (evt) => closePopup(evt, popupItem));
