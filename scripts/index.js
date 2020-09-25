@@ -86,7 +86,7 @@ const closePopup = (evt, popup) => {
     popup.classList.remove('popup_opened');
 }
 
-profileEdit.addEventListener('click', function () {
+profileEdit.addEventListener('click', () => {
   openPopup(popupEditForm)
   firstInputEdit.value = profileName.textContent;
   secondInputEdit.value = profileJob.textContent;
@@ -95,10 +95,9 @@ editFormClose.addEventListener('click', (evt) => closePopup(evt, popupEditForm))
 popupEditForm.addEventListener('click', (evt) => closePopup(evt, popupEditForm));
 editForm.addEventListener('submit', submitEditForm);
 
-profileAdd.addEventListener('click', function () {
-  openPopup(popupAddForm)
-  firstInputAdd.value = '';
-  secondInputAdd.value = '';
+profileAdd.addEventListener('click', () => {
+  openPopup(popupAddForm);
+  addForm.reset();
 });
 addFormClose.addEventListener('click', (evt) => closePopup(evt, popupAddForm));
 popupAddForm.addEventListener('click', (evt) => closePopup(evt, popupAddForm));
