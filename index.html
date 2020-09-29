@@ -34,15 +34,15 @@
     </footer>
 
     <div class="popup js-popup_form_edit">
-      <form class="form popup__form" action="#" name="editForm">
+      <form class="form popup__form" action="#" name="editForm" novalidate> 
         <h2 class="form__title">Редактировать профиль</h2>
         <label class="form__field">
-          <input class="form__input" type="text" name="name" autocomplete="off" required>
-          <span class="form__input-error"></span>
+          <input class="form__input" id="name-input" type="text" name="name" autocomplete="off" minlength="2" maxlength="40" required >
+          <span class="form__input-error" id="name-input-error" ></span>
         </label>
         <label class="form__field">
-          <input class="form__input" type="text" name="job" autocomplete="off" required>
-          <span class="form__input-error"></span>
+          <input class="form__input" id="job-input" type="text" name="job" autocomplete="off" minlength="2" maxlength="200" required>
+          <span class="form__input-error" id="job-input-error"></span>
         </label>
         <button class="form__submit" type="submit">Сохранить</button>
         <button class="form__close" type="button" aria-label="Закрыть окно"></button>
@@ -85,8 +85,9 @@
 
   </div>
   <script src="./scripts/data.js" defer></script>
-  <script src="./scripts/index.js" defer></script>
   <script src="./scripts/validate.js" defer></script>
+  <script src="./scripts/index.js" defer></script>
+  
 </body>
 
 </html>
