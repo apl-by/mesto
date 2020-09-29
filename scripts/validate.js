@@ -38,6 +38,9 @@ if (hasInvalidInput(inputList)) {
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.form__input'));
   const buttonElement = formElement.querySelector('.form__submit');
+  if (formElement.name === 'addForm') {
+    toggleButtonState(inputList, buttonElement);
+  }
   inputList.forEach((elt) => {
     elt.addEventListener('input', () => {
       isValid(formElement, elt);
