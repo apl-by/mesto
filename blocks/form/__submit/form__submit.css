@@ -28,7 +28,8 @@
 @media screen and (max-width: 460px) {
   .form__submit {
     font-size: 14px;
-    line-height: 102%;
-    margin: 0 0 18px;
+    line-height: 17px;
+    margin: 16px 0 30px;
+    min-height: 40px;
   }
 }

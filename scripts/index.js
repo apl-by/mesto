@@ -1,5 +1,3 @@
-import { initialCards } from './data.js';
-
 const profile = document.querySelector('.profile');
 const profileEdit = profile.querySelector('.profile__edit-button');
 const profileAdd = profile.querySelector('.profile__add-button');
