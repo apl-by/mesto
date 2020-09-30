@@ -34,14 +34,16 @@
     </footer>
 
     <div class="popup js-popup_form_edit">
-      <form class="form popup__form" action="#" name="editForm" novalidate> 
+      <form class="form popup__form" action="#" name="editForm" novalidate>
         <h2 class="form__title">Редактировать профиль</h2>
         <label class="form__field">
-          <input class="form__input" id="name-input" type="text" name="name" autocomplete="off" minlength="2" maxlength="40" required >
-          <span class="form__input-error" id="name-input-error" ></span>
+          <input class="form__input" id="nick-input" type="text" name="nick" autocomplete="off" minlength="2"
+            maxlength="40" required>
+          <span class="form__input-error" id="nick-input-error"></span>
         </label>
         <label class="form__field">
-          <input class="form__input" id="job-input" type="text" name="job" autocomplete="off" minlength="2" maxlength="200" required>
+          <input class="form__input" id="job-input" type="text" name="job" autocomplete="off" minlength="2"
+            maxlength="200" required>
           <span class="form__input-error" id="job-input-error"></span>
         </label>
         <button class="form__submit" type="submit">Сохранить</button>
@@ -52,7 +54,8 @@
       <form class="form popup__form" action="#" name="addForm" novalidate>
         <h2 class="form__title">Новое место</h2>
         <label class="form__field">
-          <input class="form__input" id="place-input" type="text" name="place" placeholder="Название" autocomplete="off" minlength="2" maxlength="30" required>
+          <input class="form__input" id="place-input" type="text" name="place" placeholder="Название" autocomplete="off"
+            minlength="2" maxlength="30" required>
           <span class="form__input-error" id="place-input-error"></span>
         </label>
         <label class="form__field">
@@ -86,7 +89,6 @@
   <script src="./scripts/data.js" defer></script>
   <script src="./scripts/validate.js" defer></script>
   <script src="./scripts/index.js" defer></script>
-  
 </body>
 
 </html>

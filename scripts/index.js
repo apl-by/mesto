@@ -6,7 +6,7 @@ const profileJob = profile.querySelector('.profile__job');
 
 const popupEditForm = document.querySelector('.js-popup_form_edit');
 const editForm = popupEditForm.querySelector('.form');
-const firstInputEdit = popupEditForm.querySelector('input[name="name"]');
+const firstInputEdit = popupEditForm.querySelector('input[name="nick"]');
 const secondInputEdit = popupEditForm.querySelector('input[name="job"]');
 const editFormClose = popupEditForm.querySelector('.form__close');
 
@@ -65,41 +65,66 @@ const submitAddForm = (evt) => {
   };
   const card = createCard(newCard);
   cardsList.prepend(card);
-  closePopup(evt, popupAddForm);
+  closePopup(evt);
 }
 
 const submitEditForm = (evt) => {
   evt.preventDefault();
   profileName.textContent = firstInputEdit.value;
   profileJob.textContent = secondInputEdit.value;
-  closePopup(evt, popupEditForm)
+  closePopup(evt)
 }
 
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keyup', closePopup)
 }
 
-const closePopup = (evt, popup) => {
-  if (evt.target === evt.currentTarget)
+const closePopup = (evt) => {
+  if (evt.target === evt.currentTarget || evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keyup', closePopup)
+  }
+}
+
+// возвращает дефолтное состояние полям ввода после валидации при повторном открытии формы
+const setDefaultState = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('input'));
+  const buttonElement = formElement.querySelector('.form__submit');
+  inputList.forEach((inputElement) => {
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.remove('form__input_type_error');
+    errorElement.classList.remove('form__input-error_visible');
+    errorElement.textContent = '';
+  });
+  if (formElement.name === 'editForm') {
+    buttonElement.classList.remove('form__submit_disabled');
+    buttonElement.removeAttribute('disabled', true);
+  } else if (formElement.name === 'addForm') {
+    buttonElement.classList.add('form__submit_disabled');
+    buttonElement.setAttribute('disabled', true);
+  }
 }
 
 profileEdit.addEventListener('click', () => {
   openPopup(popupEditForm)
+  setDefaultState(editForm);
   firstInputEdit.value = profileName.textContent;
   secondInputEdit.value = profileJob.textContent;
 });
-editFormClose.addEventListener('click', (evt) => closePopup(evt, popupEditForm));
-popupEditForm.addEventListener('click', (evt) => closePopup(evt, popupEditForm));
+editFormClose.addEventListener('click', closePopup);
+popupEditForm.addEventListener('click', closePopup);
 editForm.addEventListener('submit', submitEditForm);
 
 profileAdd.addEventListener('click', () => {
   openPopup(popupAddForm);
   addForm.reset();
+  setDefaultState(addForm);
 });
-addFormClose.addEventListener('click', (evt) => closePopup(evt, popupAddForm));
-popupAddForm.addEventListener('click', (evt) => closePopup(evt, popupAddForm));
+addFormClose.addEventListener('click', closePopup);
+popupAddForm.addEventListener('click', closePopup);
 addForm.addEventListener('submit', submitAddForm);
 
-zoomClose.addEventListener('click', (evt) => closePopup(evt, popupZoom));
-popupZoom.addEventListener('click', (evt) => closePopup(evt, popupZoom));
+zoomClose.addEventListener('click', closePopup);
+popupZoom.addEventListener('click', closePopup);
