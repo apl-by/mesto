@@ -6,7 +6,7 @@ const profileJob = profile.querySelector('.profile__job');
 
 const popupEditForm = document.querySelector('.js-popup_form_edit');
 const editForm = popupEditForm.querySelector('.form');
-const firstInputEdit = popupEditForm.querySelector('input[name="nick"]');
+const firstInputEdit = popupEditForm.querySelector('input[name="nickname"]');
 const secondInputEdit = popupEditForm.querySelector('input[name="job"]');
 const editFormClose = popupEditForm.querySelector('.form__close');
 
