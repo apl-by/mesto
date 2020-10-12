@@ -1,3 +1,7 @@
+import { initialCards, validationSelectors } from './data.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const profile = document.querySelector('.profile');
 const profileEdit = profile.querySelector('.profile__edit-button');
 const profileAdd = profile.querySelector('.profile__add-button');
@@ -17,44 +21,17 @@ const secondInputAdd = popupAddForm.querySelector('input[name="link"]');
 const addFormClose = popupAddForm.querySelector('.form__close');
 
 const popupZoom = document.querySelector('.js-popup_zoomed');
-const zoomImage = popupZoom.querySelector('.zoom__img');
-const zoomText = popupZoom.querySelector('.zoom__text');
 const zoomClose = popupZoom.querySelector('.zoom__close');
 
 const cardsList = document.querySelector('.cards__list');
-const cardTemplate = document.querySelector('.js-card').content;
 
+const editFormValidator = new FormValidator(validationSelectors, editForm);
+const addFormValidator = new FormValidator(validationSelectors, addForm);
 
-const createCard = (elt) => {
-  const copyCardTemplate = cardTemplate.cloneNode(true);
-  const copyCardImage = copyCardTemplate.querySelector('.card__img');
-  copyCardTemplate.querySelector('.card__title').textContent = elt.name;
-  copyCardImage.src = elt.link;
-  copyCardImage.alt = elt.name;
-  copyCardTemplate.querySelector('.card__button').addEventListener('click', putLike);
-  copyCardTemplate.querySelector('.card__recycle').addEventListener('click', removeCard);
-  copyCardImage.addEventListener('click', () => zoomCard(elt));
-  return copyCardTemplate
-}
-
-const putLike = (evt) => {
-  evt.target.classList.toggle('card__button_active')
-}
-
-const removeCard = (evt) => {
-  evt.target.closest('.card').remove()
-}
-
-const zoomCard = (elt) => {
-  openPopup(popupZoom)
-  zoomImage.src = elt.link;
-  zoomImage.alt = elt.name;
-  zoomText.textContent = elt.name
-}
-
-initialCards.forEach(elt => {
-  const card = createCard(elt);
-  cardsList.append(card);
+initialCards.forEach(item => {
+  const card = new Card(item, '.js-card-template', openPopup);
+  const cardElement = card.generateCard();
+  cardsList.append(cardElement);
 });
 
 const submitAddForm = (evt) => {
@@ -63,8 +40,9 @@ const submitAddForm = (evt) => {
     name: firstInputAdd.value,
     link: secondInputAdd.value
   };
-  const card = createCard(newCard);
-  cardsList.prepend(card);
+  const card = new Card(newCard, '.js-card-template', openPopup);
+  const cardElement = card.generateCard();
+  cardsList.prepend(cardElement);
   closePopup(evt);
 }
 
@@ -75,18 +53,21 @@ const submitEditForm = (evt) => {
   closePopup(evt)
 }
 
-const openPopup = (popup) => {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keyup', closePopup)
 }
 
-const closePopup = (evt) => {
+function closePopup(evt) {
   if (evt.target === evt.currentTarget || evt.key === 'Escape') {
     const popup = document.querySelector('.popup_opened');
     popup.classList.remove('popup_opened');
     document.removeEventListener('keyup', closePopup)
   }
 }
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 // возвращает дефолтное состояние полям ввода после валидации при повторном открытии формы
 const setDefaultState = (formElement) => {
