@@ -8,7 +8,7 @@ export default class FormValidator {
     this._errorClass = data.errorClass;
   }
 
-  _showInputError = (formElement, inputElement, errorMessage) => {
+  _showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.classList.add(this._errorClass);
