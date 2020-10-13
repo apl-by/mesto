@@ -21,6 +21,8 @@ const secondInputAdd = popupAddForm.querySelector('input[name="link"]');
 const addFormClose = popupAddForm.querySelector('.form__close');
 
 const popupZoom = document.querySelector('.js-popup_zoomed');
+const zoomImage = popupZoom.querySelector('.zoom__img');
+const zoomText = popupZoom.querySelector('.zoom__text');
 const zoomClose = popupZoom.querySelector('.zoom__close');
 
 const cardsList = document.querySelector('.cards__list');
@@ -28,8 +30,15 @@ const cardsList = document.querySelector('.cards__list');
 const editFormValidator = new FormValidator(validationSelectors, editForm);
 const addFormValidator = new FormValidator(validationSelectors, addForm);
 
+const zoomCard = (name, link) => {
+  openPopup(popupZoom)
+  zoomImage.src = link;
+  zoomImage.alt = name;
+  zoomText.textContent = name;
+}
+
 initialCards.forEach(item => {
-  const card = new Card(item, '.js-card-template', openPopup);
+  const card = new Card(item, '.js-card-template', zoomCard);
   const cardElement = card.generateCard();
   cardsList.append(cardElement);
 });
@@ -40,7 +49,7 @@ const submitAddForm = (evt) => {
     name: firstInputAdd.value,
     link: secondInputAdd.value
   };
-  const card = new Card(newCard, '.js-card-template', openPopup);
+  const card = new Card(newCard, '.js-card-template', zoomCard);
   const cardElement = card.generateCard();
   cardsList.prepend(cardElement);
   closePopup(evt);
