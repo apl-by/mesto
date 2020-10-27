@@ -23,11 +23,11 @@ import {
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
 // delete?
 export const cardsList = document.querySelector('.cards__list');
 
-const editFormValidator = new FormValidator(validationSelectors, editForm);
-const addFormValidator = new FormValidator(validationSelectors, addForm);
+
 
 const zoomCard = (name, link) => {
   openPopup(popupZoom)
@@ -68,18 +68,24 @@ const submitEditForm = (evt) => {
   closePopup(evt)
 }
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keyup', closePopup)
-}
+// function openPopup(popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keyup', closePopup)
+// }
 
-function closePopup(evt) {
-  if (evt.target === evt.currentTarget || evt.key === 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keyup', closePopup)
-  }
-}
+// function closePopup(evt) {
+//   if (evt.target === evt.currentTarget || evt.key === 'Escape') {
+//     const popup = document.querySelector('.popup_opened');
+//     popup.classList.remove('popup_opened');
+//     document.removeEventListener('keyup', closePopup)
+//   }
+// }
+
+const pop = new Popup('.js-popup_form_edit');
+pop.setEventListeners()
+
+const editFormValidator = new FormValidator(validationSelectors, editForm);
+const addFormValidator = new FormValidator(validationSelectors, addForm);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
@@ -104,23 +110,23 @@ const setDefaultState = (formElement) => {
 }
 
 profileEdit.addEventListener('click', () => {
-  openPopup(popupEditForm)
+  pop.openPopup()
   setDefaultState(editForm);
   firstInputEdit.value = profileName.textContent;
   secondInputEdit.value = profileJob.textContent;
 });
-editFormClose.addEventListener('click', closePopup);
-popupEditForm.addEventListener('click', closePopup);
-editForm.addEventListener('submit', submitEditForm);
+// editFormClose.addEventListener('click', closePopup);
+// popupEditForm.addEventListener('click', closePopup);
+// editForm.addEventListener('submit', submitEditForm);
 
 profileAdd.addEventListener('click', () => {
-  openPopup(popupAddForm);
+  // openPopup(popupAddForm);
   addForm.reset();
   setDefaultState(addForm);
 });
-addFormClose.addEventListener('click', closePopup);
-popupAddForm.addEventListener('click', closePopup);
-addForm.addEventListener('submit', submitAddForm);
+// addFormClose.addEventListener('click', closePopup);
+// popupAddForm.addEventListener('click', closePopup);
+// addForm.addEventListener('submit', submitAddForm);
 
-zoomClose.addEventListener('click', closePopup);
-popupZoom.addEventListener('click', closePopup);
+// zoomClose.addEventListener('click', closePopup);
+// popupZoom.addEventListener('click', closePopup);
