@@ -1,31 +1,30 @@
-import { initialCards, validationSelectors } from '../utils/constants.js';
+import {
+  initialCards,
+  validationSelectors,
+  profileEdit,
+  profileAdd,
+  profileName,
+  profileJob,
+  popupEditForm,
+  editForm,
+  firstInputEdit,
+  secondInputEdit,
+  editFormClose,
+  popupAddForm,
+  addForm,
+  firstInputAdd,
+  secondInputAdd,
+  addFormClose,
+  popupZoom,
+  zoomImage,
+  zoomText,
+  zoomClose,
+} from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-
-const profile = document.querySelector('.profile');
-const profileEdit = profile.querySelector('.profile__edit-button');
-const profileAdd = profile.querySelector('.profile__add-button');
-const profileName = profile.querySelector('.profile__name');
-const profileJob = profile.querySelector('.profile__job');
-
-const popupEditForm = document.querySelector('.js-popup_form_edit');
-const editForm = popupEditForm.querySelector('.form');
-const firstInputEdit = popupEditForm.querySelector('input[name="nickname"]');
-const secondInputEdit = popupEditForm.querySelector('input[name="job"]');
-const editFormClose = popupEditForm.querySelector('.form__close');
-
-const popupAddForm = document.querySelector('.js-popup_form_add');
-const addForm = popupAddForm.querySelector('.form');
-const firstInputAdd = popupAddForm.querySelector('input[name="place"]');
-const secondInputAdd = popupAddForm.querySelector('input[name="link"]');
-const addFormClose = popupAddForm.querySelector('.form__close');
-
-const popupZoom = document.querySelector('.js-popup_zoomed');
-const zoomImage = popupZoom.querySelector('.zoom__img');
-const zoomText = popupZoom.querySelector('.zoom__text');
-const zoomClose = popupZoom.querySelector('.zoom__close');
-
-const cardsList = document.querySelector('.cards__list');
+import Section from '../components/Section.js';
+// delete?
+export const cardsList = document.querySelector('.cards__list');
 
 const editFormValidator = new FormValidator(validationSelectors, editForm);
 const addFormValidator = new FormValidator(validationSelectors, addForm);
@@ -37,11 +36,18 @@ const zoomCard = (name, link) => {
   zoomText.textContent = name;
 }
 
-initialCards.forEach(item => {
-  const card = new Card(item, '.js-card-template', zoomCard);
-  const cardElement = card.generateCard();
-  cardsList.append(cardElement);
-});
+const cardItems = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '.js-card-template', zoomCard);
+    const cardElement = card.generateCard();
+    cardItems.addItemAppend(cardElement);
+  },
+},
+  '.cards__list'
+);
+
+cardItems.renderItems()
 
 const submitAddForm = (evt) => {
   evt.preventDefault();
