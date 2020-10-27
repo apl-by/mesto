@@ -24,30 +24,38 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 // delete?
 export const cardsList = document.querySelector('.cards__list');
 
+// const zoomCard = (name, link) => {
+//   openPopup(popupZoom)
+//   zoomImage.src = link;
+//   zoomImage.alt = name;
+//   zoomText.textContent = name;
+// }
 
-
-const zoomCard = (name, link) => {
-  openPopup(popupZoom)
-  zoomImage.src = link;
-  zoomImage.alt = name;
-  zoomText.textContent = name;
-}
-
-const cardItems = new Section({
+const cardSection = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '.js-card-template', zoomCard);
+    const card = new Card(item,
+      '.js-card-template',
+      {
+        handleCardClick: (link, name) => {
+          const popupWithImage = new PopupWithImage('.js-popup_zoomed');
+          popupWithImage.openPopup(link, name);
+          popupWithImage.setEventListeners('.zoom__close')
+        }
+      }
+    );
     const cardElement = card.generateCard();
-    cardItems.addItemAppend(cardElement);
+    cardSection.addItemAppend(cardElement);
   },
 },
   '.cards__list'
 );
 
-cardItems.renderItems()
+cardSection.renderItems()
 
 const submitAddForm = (evt) => {
   evt.preventDefault();
@@ -81,8 +89,8 @@ const submitEditForm = (evt) => {
 //   }
 // }
 
-const pop = new Popup('.js-popup_form_edit');
-pop.setEventListeners()
+const popup = new Popup('.js-popup_form_edit');//--------------------
+popup.setEventListeners('.form__close')//------------------------------
 
 const editFormValidator = new FormValidator(validationSelectors, editForm);
 const addFormValidator = new FormValidator(validationSelectors, addForm);
@@ -110,7 +118,7 @@ const setDefaultState = (formElement) => {
 }
 
 profileEdit.addEventListener('click', () => {
-  pop.openPopup()
+  pop.openPopup() //------------------------------------
   setDefaultState(editForm);
   firstInputEdit.value = profileName.textContent;
   secondInputEdit.value = profileJob.textContent;
