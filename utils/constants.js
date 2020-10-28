@@ -48,7 +48,7 @@ export const editFormClose = popupEditForm.querySelector('.form__close');
 
 export const popupAddForm = document.querySelector('.js-popup_form_add');
 export const addForm = popupAddForm.querySelector('.form');
-export const firstInputAdd = popupAddForm.querySelector('input[name="place"]');
+export const firstInputAdd = popupAddForm.querySelector('input[name="name"]');
 export const secondInputAdd = popupAddForm.querySelector('input[name="link"]');
 export const addFormClose = popupAddForm.querySelector('.form__close');
 
