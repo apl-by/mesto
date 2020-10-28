@@ -15,6 +15,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const insertCard = new Section(
   {
@@ -33,6 +34,9 @@ const userInfo = new UserInfo(
     jobSelector: '.profile__job'
   }
 );
+
+const popupWithImage = new PopupWithImage('.js-popup_zoomed')
+popupWithImage.setEventListeners('.zoom__close');
 
 
 const popupAddForm = new PopupWithForm(

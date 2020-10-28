@@ -8,7 +8,6 @@ import PopupWithImage from '../components/PopupWithImage.js';
 const zoomImage = (link, name) => {
   const popupWithImage = new PopupWithImage('.js-popup_zoomed');
   popupWithImage.openPopup(link, name);
-  popupWithImage.setEventListeners('.zoom__close');
 }
 
 export const renderCard = (cardData) => {
