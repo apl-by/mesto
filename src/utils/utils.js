@@ -5,8 +5,10 @@ import {
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 
+const popupWithImage = new PopupWithImage('.js-popup_zoomed')
+popupWithImage.setEventListeners('.zoom__close');
+
 const zoomImage = (link, name) => {
-  const popupWithImage = new PopupWithImage('.js-popup_zoomed');
   popupWithImage.openPopup(link, name);
 }
 
