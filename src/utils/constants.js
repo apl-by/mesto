@@ -40,8 +40,8 @@ export const profileAdd = profile.querySelector('.profile__add-button');
 
 export const popupEditForm = document.querySelector('.js-popup_form_edit');
 export const editForm = popupEditForm.querySelector('.form');
-export const firstInputEdit = popupEditForm.querySelector('input[name="nickname"]');
-export const secondInputEdit = popupEditForm.querySelector('input[name="job"]');
+export const firstInputEdit = popupEditForm.querySelector('input[name="name"]');
+export const secondInputEdit = popupEditForm.querySelector('input[name="about"]');
 
 export const popupAddForm = document.querySelector('.js-popup_form_add');
 export const addForm = popupAddForm.querySelector('.form');

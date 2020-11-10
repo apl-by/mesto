@@ -1,5 +1,6 @@
 import {
   firstInputEdit,
+  profile,
   secondInputEdit,
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
@@ -19,8 +20,8 @@ export const renderCard = (cardData) => {
 }
 
 export const setInputValues = (profileValues) => {
-  firstInputEdit.value = profileValues.nickname;
-  secondInputEdit.value = profileValues.job;
+  firstInputEdit.value = profileValues.name;
+  secondInputEdit.value = profileValues.about;
 }
 
 // возвращает дефолтное состояние полям ввода после валидации при повторном открытии формы
