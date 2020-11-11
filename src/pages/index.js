@@ -43,12 +43,37 @@ const openConfirmation = (cardId, cardItem) => {
   popupDeleteCard.openPopup(cardId, cardItem)
 }
 
+const putLike = (cardId, cardItem) => {
+api.putLike(cardId)
+.then((res) => {
+cardItem.querySelector('.card__button').classList.add('card__button_active');
+cardItem.querySelector('.card__like-counter').textContent = res.likes.length;
+})
+.catch(err => console.log(err))
+}
+
+const deleteLike = (cardId, cardItem) => {
+  api.deleteLike(cardId)
+.then((res) => {
+cardItem.querySelector('.card__button').classList.remove('card__button_active');
+cardItem.querySelector('.card__like-counter').textContent = res.likes.length;
+})
+.catch(err => console.log(err))
+}
+
 export const renderCard = (cardData) => {
   const card = new Card(cardData,  myId, '.js-card-template', {
     handleCardClick: zoomImage,
     openConfirmation: openConfirmation,
+    putLike: putLike,
+    deleteLike: deleteLike
   },);
   const cardElement = card.generateCard();
+  cardElement.querySelector('.card__like-counter').textContent = cardData.likes.length;
+  if(cardData.likes.some((item) =>{
+     return item._id === myId })) {
+      cardElement.querySelector('.card__button').classList.add('card__button_active');
+     }
   return cardElement;
 }
 
@@ -146,7 +171,3 @@ profileAdd.addEventListener('click', () => {
   popupAddForm.openPopup();
   setDefaultState(addForm);
 });
-
-// profileAdd.addEventListener('click', () => {
-//   popupDeleteCard.openPopup()
-// })

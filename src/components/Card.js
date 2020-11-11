@@ -1,5 +1,9 @@
 export default class Card {
-  constructor({ name, link, owner, _id }, myId, cardSelector, { handleCardClick, openConfirmation }) {
+  constructor(
+    { name, link, owner, _id },
+    myId,
+    cardSelector,
+    { handleCardClick, openConfirmation, putLike, deleteLike }) {
     this._name = name;
     this._link = link;
     this._owner = owner._id;
@@ -8,6 +12,8 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._openConfirmation = openConfirmation;
+    this._putLike = putLike;
+    this._deleteLike = deleteLike;
   }
 
   _getTemplate() {
@@ -21,15 +27,15 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__button').addEventListener('click', () => this._putLike());
-    this._element.querySelector('.card__recycle').addEventListener('click', () => {
-      this._openConfirmation(this._cardId, this._element);
+    this._element.querySelector('.card__button').addEventListener('click', () => {
+      if (this._element.querySelector('.card__button').classList.contains('card__button_active')) {
+        this._deleteLike(this._cardId, this._element)
+      } else {
+        this._putLike(this._cardId, this._element)
+      }
     });
+    this._element.querySelector('.card__recycle').addEventListener('click', () => this._openConfirmation(this._cardId, this._element));
     this._element.querySelector('.card__img').addEventListener('click', () => this._handleCardClick(this._link, this._name));
-  }
-
-  _putLike() {
-    this._element.querySelector('.card__button').classList.toggle('card__button_active');
   }
 
   generateCard() {
