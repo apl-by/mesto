@@ -5,10 +5,11 @@ import {
   profileEdit,
   profileAdd,
   editForm,
-  addForm
+  addForm,
+  myId
+  // popupDeleteBtn
 } from '../utils/constants.js';
 import {
-  renderCard,
   setDefaultState,
   setInputValues
 } from '../utils/utils.js';
@@ -17,6 +18,9 @@ import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import PopupConfirm from '../components/PopupConfirm.js';
+import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 
 const api = new Api({
@@ -26,6 +30,29 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 }); 
+
+
+const popupWithImage = new PopupWithImage('.js-popup_zoomed')
+popupWithImage.setEventListeners('.zoom__close');
+
+const zoomImage = (link, name) => {
+  popupWithImage.openPopup(link, name);
+}
+
+const openConfirmation = (cardId, cardItem) => {
+  popupDeleteCard.openPopup(cardId, cardItem)
+}
+
+export const renderCard = (cardData) => {
+  const card = new Card(cardData,  myId, '.js-card-template', {
+    handleCardClick: zoomImage,
+    openConfirmation: openConfirmation,
+  },);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+
 
 const insertCard = new Section(
   {
@@ -51,19 +78,6 @@ api.getUserInfo()
   userInfo.setUserInfo(res);
 })
 .catch(err => console.log(err))
-
-
-// const insertCard = new Section(
-//   {
-//     items: initialCards,
-//     renderer: (cardData) => {
-//       insertCard.addItemAppend(renderCard(cardData));
-//     }
-//   },
-//   '.cards__list'
-// );
-// insertCard.renderItems();
-
 
 
 const userInfo = new UserInfo(
@@ -102,6 +116,20 @@ const popupEditForm = new PopupWithForm(
 popupEditForm.setEventListeners('.form__close');
 
 
+const popupDeleteCard = new PopupConfirm({
+  submitForm: (cardId, cardItem) => {
+    api.deleteCard(cardId)
+  .then(() => {
+    cardItem.remove()
+  })
+  .catch(err => console.log(err))
+  }
+},
+'.js-popup_delete'
+);
+popupDeleteCard.setEventListeners('.form__close')
+
+
 const editFormValidator = new FormValidator(validationSelectors, editForm);
 const addFormValidator = new FormValidator(validationSelectors, addForm);
 
@@ -118,3 +146,7 @@ profileAdd.addEventListener('click', () => {
   popupAddForm.openPopup();
   setDefaultState(addForm);
 });
+
+// profileAdd.addEventListener('click', () => {
+//   popupDeleteCard.openPopup()
+// })

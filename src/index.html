@@ -49,6 +49,7 @@
         <button class="form__close" type="button" aria-label="Закрыть окно"></button>
       </form>
     </div>
+
     <div class="popup js-popup_form_add">
       <form class="form popup__form" action="#" name="addForm" novalidate>
         <h2 class="form__title">Новое место</h2>
@@ -65,6 +66,7 @@
         <button class="form__close" type="button" aria-label="Закрыть окно"></button>
       </form>
     </div>
+
     <div class="popup js-popup_zoomed">
       <div class="zoom">
         <img src="#" alt="" class="zoom__img">
@@ -73,12 +75,23 @@
       </div>
     </div>
 
+    <div class="popup js-popup_delete">
+      <form class="form popup__form" action="#" name="deleteForm" novalidate>
+        <h2 class="form__title form__title_size_s">Вы уверены?</h2>
+        <button class="form__submit form__submit_size_s" type="submit">Да</button>
+        <button class="form__close" type="button" aria-label="Закрыть окно"></button>
+      </form>
+    </div>
+
     <template class="js-card-template">
       <li class="card">
         <img src="#" alt="" class="card__img">
         <div class="card__sign">
           <h2 class="card__title"></h2>
-          <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
+          <div class="card__container">
+            <button class="card__button" type="button" aria-label="Кнопка - нравится"></button>
+            <p class="card__like-counter">0</p>
+          </div>
         </div>
         <button class="card__recycle" type="button" aria-label="Кнопка - удалить"></button>
       </li>

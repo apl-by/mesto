@@ -3,21 +3,6 @@ import {
   profile,
   secondInputEdit,
 } from '../utils/constants.js';
-import Card from '../components/Card.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-
-const popupWithImage = new PopupWithImage('.js-popup_zoomed')
-popupWithImage.setEventListeners('.zoom__close');
-
-const zoomImage = (link, name) => {
-  popupWithImage.openPopup(link, name);
-}
-
-export const renderCard = (cardData) => {
-  const card = new Card(cardData, {handleCardClick: zoomImage},'.js-card-template');
-  const cardElement = card.generateCard();
-  return cardElement;
-}
 
 export const setInputValues = (profileValues) => {
   firstInputEdit.value = profileValues.name;

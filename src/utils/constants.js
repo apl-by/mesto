@@ -34,6 +34,8 @@ export const validationSelectors = {
   errorClass: 'form__input-error_visible'
 }
 
+export const myId = '14b518e5ac408968f2839ae4';
+
 export const profile = document.querySelector('.profile');
 export const profileEdit = profile.querySelector('.profile__edit-button');
 export const profileAdd = profile.querySelector('.profile__add-button');
@@ -45,5 +47,7 @@ export const secondInputEdit = popupEditForm.querySelector('input[name="about"]'
 
 export const popupAddForm = document.querySelector('.js-popup_form_add');
 export const addForm = popupAddForm.querySelector('.form');
+
+// export const popupDeleteBtn = document.querySelector('.js-popup_delete')
 
 
