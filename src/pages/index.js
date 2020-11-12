@@ -111,10 +111,9 @@ const popupAddForm = new PopupWithForm(
         .then((res) => {
           insertCard.addItemPrepend(renderCard(res))
           closePopup()
-          popup.querySelector('.form__submit').textContent = 'Создать';
         })
         .catch(err => console.log(err))
-
+        .finally(() => popup.querySelector('.form__submit').textContent = 'Создать')
     }
   },
   '.js-popup_form_add'
@@ -130,9 +129,9 @@ const popupEditForm = new PopupWithForm(
         .then((res) => {
           userInfo.setUserInfo(res)
           closePopup()
-          popup.querySelector('.form__submit').textContent = 'Сохранить';
         })
         .catch(err => console.log(err))
+        .finally(() => popup.querySelector('.form__submit').textContent = 'Сохранить')
     }
   },
   '.js-popup_form_edit'
@@ -148,9 +147,9 @@ const popupEditAvatar = new PopupWithForm(
         .then((res) => {
           userInfo.setUserInfo(res)
           closePopup()
-          popup.querySelector('.form__submit').textContent = 'Сохранить';
         })
         .catch(err => console.log(err))
+        .finally(() => popup.querySelector('.form__submit').textContent = 'Сохранить')
     }
   },
   '.js-popup_form_avatar'
