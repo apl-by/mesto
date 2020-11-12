@@ -14,7 +14,12 @@
     </header>
     <main class="content page__main">
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+        <div class="profile__container">
+          <div class="profile__shading">
+            <button class="profile__avatar-btn" type="button" aria-label="Кнопка - редактировать аватар"></button>
+          </div>
+          <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+        </div>
         <div class="profile__info">
           <div class="profile__box">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -79,6 +84,18 @@
       <form class="form popup__form" action="#" name="deleteForm" novalidate>
         <h2 class="form__title form__title_size_s">Вы уверены?</h2>
         <button class="form__submit form__submit_size_s" type="submit">Да</button>
+        <button class="form__close" type="button" aria-label="Закрыть окно"></button>
+      </form>
+    </div>
+
+    <div class="popup js-popup_form_avatar">
+      <form class="form popup__form" action="#" name="avatarForm" novalidate>
+        <h2 class="form__title">Обновить аватар</h2>
+        <label class="form__field">
+          <input class="form__input" id="link-input" type="url" name="link" placeholder="Ссылка на картинку" required>
+          <span class="form__input-error" id="link-input-error"></span>
+        </label>
+        <button class="form__submit" type="submit">Сохранить</button>
         <button class="form__close" type="button" aria-label="Закрыть окно"></button>
       </form>
     </div>

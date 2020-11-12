@@ -1,6 +1,5 @@
 import {
   firstInputEdit,
-  profile,
   secondInputEdit,
 } from '../utils/constants.js';
 
@@ -21,9 +20,9 @@ export const setDefaultState = (formElement) => {
   });
   if (formElement === document.forms.editForm) {
     buttonElement.classList.remove('form__submit_disabled');
-    buttonElement.removeAttribute('disabled', true);
-  } else if (formElement === document.forms.addForm) {
+    buttonElement.removeAttribute('disabled', 'disabled');
+  } else if (formElement === document.forms.addForm || document.forms.avatarForm) {
     buttonElement.classList.add('form__submit_disabled');
-    buttonElement.setAttribute('disabled', true);
+    buttonElement.setAttribute('disabled', 'disabled');
   }
 }

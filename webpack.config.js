@@ -22,16 +22,16 @@ module.exports = {
               'postcss-loader'
             ],
         },
-        // {
-        //   test: /\.js$/,
-        //   exclude: '/node_modules/',
-        //   use: {
-        //     loader: 'babel-loader',
-        //     options: {
-        //       presets: ['@babel/preset-env']
-        //     }
-        //   }
-        // },
+        {
+          test: /\.js$/,
+          exclude: '/node_modules/',
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
+        },
         {
           test: /\.(png|svg|jpg|gif|woff2|woff)$/,
           loader: 'file-loader'
@@ -43,7 +43,6 @@ module.exports = {
       ]
     },
     plugins: [
-      // настроили плагин
       new HtmlWebpackPlugin({
         template: './src/index.html'
       }),
