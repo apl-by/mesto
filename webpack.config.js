@@ -49,7 +49,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: './vendor/fonts',
+              outputPath: './vendor/',
             },
           },
         ]
