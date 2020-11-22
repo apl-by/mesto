@@ -7,8 +7,6 @@ export const validationSelectors = {
   errorClass: 'form__input-error_visible'
 }
 
-export const myId = '14b518e5ac408968f2839ae4';
-
 export const profile = document.querySelector('.profile');
 export const profileEdit = profile.querySelector('.profile__edit-button');
 export const profileAdd = profile.querySelector('.profile__add-button');

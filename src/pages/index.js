@@ -5,7 +5,6 @@ import {
   profileAdd,
   editForm,
   addForm,
-  myId,
   profilEditAvatar,
   editAvatarForm
 } from '../utils/constants.js';
@@ -21,6 +20,8 @@ import Api from '../components/Api.js';
 import PopupConfirm from '../components/PopupConfirm.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+
+let myId
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-17',
@@ -41,38 +42,30 @@ const openConfirmation = (cardId, cardItem) => {
   popupDeleteCard.openPopup(cardId, cardItem)
 }
 
-const putLike = (cardId, cardItem) => {
+const putLike = (cardId, displayLike) => {
   api.putLike(cardId)
     .then((res) => {
-      cardItem.querySelector('.card__button').classList.add('card__button_active');
-      cardItem.querySelector('.card__like-counter').textContent = res.likes.length;
+      displayLike(res);
     })
     .catch(err => console.log(err))
 }
 
-const deleteLike = (cardId, cardItem) => {
+const deleteLike = (cardId, displayLike) => {
   api.deleteLike(cardId)
     .then((res) => {
-      cardItem.querySelector('.card__button').classList.remove('card__button_active');
-      cardItem.querySelector('.card__like-counter').textContent = res.likes.length;
+      displayLike(res);
     })
     .catch(err => console.log(err))
 }
 
 const renderCard = (cardData) => {
   const card = new Card(cardData, myId, '.js-card-template', {
-    handleCardClick: zoomImage,
-    openConfirmation: openConfirmation,
-    putLike: putLike,
-    deleteLike: deleteLike
+    zoomImage,
+    openConfirmation,
+    putLike,
+    deleteLike
   });
   const cardElement = card.generateCard();
-  cardElement.querySelector('.card__like-counter').textContent = cardData.likes.length;
-  if (cardData.likes.some((item) => {
-    return item._id === myId
-  })) {
-    cardElement.querySelector('.card__button').classList.add('card__button_active');
-  }
   return cardElement;
 }
 
@@ -98,6 +91,7 @@ Promise.all([
   api.getUserInfo()
 ])
   .then(([initialCards, userParam]) => {
+    myId = userParam._id
     insertCard.renderItems(initialCards);
     userInfo.setUserInfo(userParam)
   })
@@ -105,15 +99,15 @@ Promise.all([
 
 const popupAddForm = new PopupWithForm(
   {
-    submitForm: (formValues, popup, closePopup) => {
-      popup.querySelector('.form__submit').textContent = 'Сохранение...';
+    submitForm: (formValues, closePopup) => {
+      popupAddForm.setBtnValue('Сохранение...');
       api.addNewCard(formValues)
         .then((res) => {
           insertCard.addItemPrepend(renderCard(res))
           closePopup()
         })
         .catch(err => console.log(err))
-        .finally(() => popup.querySelector('.form__submit').textContent = 'Создать')
+        .finally(() => popupAddForm.setBtnValue())
     }
   },
   '.js-popup_form_add'
@@ -123,15 +117,15 @@ popupAddForm.setEventListeners('.form__close');
 
 const popupEditForm = new PopupWithForm(
   {
-    submitForm: (info, popup, closePopup) => {
-      popup.querySelector('.form__submit').textContent = 'Сохранение...';
+    submitForm: (info, closePopup) => {
+      popupEditForm.setBtnValue('Сохранение...');
       api.updateUserInfo(info)
         .then((res) => {
           userInfo.setUserInfo(res)
           closePopup()
         })
         .catch(err => console.log(err))
-        .finally(() => popup.querySelector('.form__submit').textContent = 'Сохранить')
+        .finally(() => popupEditForm.setBtnValue())
     }
   },
   '.js-popup_form_edit'
@@ -141,15 +135,15 @@ popupEditForm.setEventListeners('.form__close');
 
 const popupEditAvatar = new PopupWithForm(
   {
-    submitForm: (info, popup, closePopup) => {
-      popup.querySelector('.form__submit').textContent = 'Сохранение...';
+    submitForm: (info, closePopup) => {
+      popupEditAvatar.setBtnValue('Сохранение...');
       api.editAvatar(info.link)
         .then((res) => {
           userInfo.setUserInfo(res)
           closePopup()
         })
         .catch(err => console.log(err))
-        .finally(() => popup.querySelector('.form__submit').textContent = 'Сохранить')
+        .finally(() => popupEditAvatar.setBtnValue())
     }
   },
   '.js-popup_form_avatar'
