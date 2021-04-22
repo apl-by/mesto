@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Apl-by/mesto.git"
+    "url": "git+https://github.com/apl-by/mesto.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Apl-by/mesto/issues"
+    "url": "https://github.com/apl-by/mesto/issues"
   },
-  "homepage": "https://github.com/Apl-by/mesto#readme",
+  "homepage": "https://github.com/apl-by/mesto#readme",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
